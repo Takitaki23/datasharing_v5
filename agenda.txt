@@ -1,0 +1,30 @@
+Agenda for saso 
+
+1. linisin yung bugs and errors, alam mo naman na yon, like yung mga mabagal mag load kapag mag chachange position etc, pag mag piprint etc. -> done
+
+2. sa data table ang idisplay lang is yung student id, last name, middle name, course, para di crowded, tas don na nakalagay sa modal lahat -> done
+ng info
+
+3. iconsume na data is yung "course" not "college", maglagay ng sweet alert o kahit indicator lang kapag mag sasave ng data or anything(lalo na pag magsasave ng position don sa preview id, maglagay ka ng indicator na nasaved na yung postion) and ganun den kapag mag uupdate ng data or mag dedelete. -> done
+
+4. kahit alisin na yung edit button, kumbaga pag mag papalit nalang ng image or signature is don nalang sa add button. -> done
+
+6. tapos yung sorting is by sem/schoolyear katulad ng sa gradebook
+
+7. tas yung pag pasok ng data ng picture and signature is same nalang don sa process ng osa yung may mga crop and rotate.
+
+8. tas yung kung ano font ng template is same ng font ng info
+
+9.  yung change template is may isa pang tab na pang change template then, ang laman non is upload id template tapos sa gilid ng canvas 
+ may nakadisplay na parang mga text e.g (last name, first name, middle name, etc. lahat ng info sa id (front and back)) tas idadrag lang 
+yung mga text na yun tas pag sinave is automatic kung san nakalagay yung mga data mo na dinarag is don masasave yung info lahat ng students. tas pede na yun gamitin yung template. 
+
+10. then reusable yung id template, kumbaga halimbawa nag gawa tayo ng template ngayon,tas nag bago ulet tayo,dat yung previous is pede pa den gamitin no, (if gusto ulet gamitin yun ng saso) kumbaga pede mo iselect kung anong gusto mo gamitin na template na mga nauplaod mo in previous. kumbaga reusable yung mga template na inupload o nagamit mo dati.
+
+11. tas yung sa pag sasave ng position is dapat nasasave na sa db. 
+
+give nalang ng date for final product ng saso, then meeting for demonstration, para mapacheckan kay sir p., and then para makastart for the 2nd department which is cashier. (need muna talaga matapos saso, bago makakuha ng info kay sir about cashier, kasi sasabihin nun tapusin muna saso hahahhaa). then usap tayo about last payment during development of cashier.
+
+
+
+

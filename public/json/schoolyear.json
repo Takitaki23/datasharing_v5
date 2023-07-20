@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "school_year": "2021-2022",
+        "semester": "2nd Semester",
+        "status": "active",
+        "enrollment_status": 0
+    },
+    {
+        "id": 3,
+        "school_year": "2021-2022",
+        "semester": "Summer",
+        "status": "active",
+        "enrollment_status": 0
+    },
+    {
+        "id": 2,
+        "school_year": "2022-2023",
+        "semester": "1st Semester",
+        "status": "active",
+        "enrollment_status": 0
+    },
+    {
+        "id": 4,
+        "school_year": "2022-2023",
+        "semester": "2nd Semester",
+        "status": "active",
+        "enrollment_status": 0
+    },
+    {
+        "id": 5,
+        "school_year": "2023-2024",
+        "semester": "1st Semester",
+        "status": "active",
+        "enrollment_status": 1
+    }
+]
