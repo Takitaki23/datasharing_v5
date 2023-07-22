@@ -25,7 +25,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <iframe :src="statePath" :key="dataId" style="top:0; left:0; bottom:0; right:0; width:100%; height:480px; border:none; margin:0; padding:0; overflow:hidden;">
+                            <iframe :src="statePath" :key="statePath" style="top:0; left:0; bottom:0; right:0; width:100%; height:480px; border:none; margin:0; padding:0; overflow:hidden;">
                                 Your browser doesn't support iframes
                             </iframe>
                         </div>

@@ -36,7 +36,7 @@
         >
             <div class="col-md-12">
                 <div class="table-responsive" style="max-height: 500px">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 col-sm-4" style="width: 30%;">
                             <label class="input-group-text"><b>Semester</b></label>
                             <select class="form-select" v-model="selectedYear">
                                 <option selected class="text-secondary"><b>Choose a semester...</b></option>
@@ -197,6 +197,7 @@ export default {
         const selectedCheckboxes = reactive({
             pids: [],
             student_data: [],
+            student_cred: [],
         });
 
         const modalData = ref(null);
@@ -287,34 +288,34 @@ export default {
         });
 
         // Computed property to filter and transform students based on the selected year
-const filteredStudents = computed(() => {
-  if (users.value && selectedYear.value !== null) {
-    const id_Gen_Array = id_Gen.value ? Object.values(id_Gen.value) : [];
+        const filteredStudents = computed(() => {
+        if (users.value && selectedYear.value !== null) {
+            const id_Gen_Array = id_Gen.value ? Object.values(id_Gen.value) : [];
 
-    return users.value.data.filter((student) => {
-      const yearMatches = student.school_year_semester.startsWith(selectedYear.value);
+            return users.value.data.filter((student) => {
+            const yearMatches = student.school_year_semester.startsWith(selectedYear.value);
 
-      const semesterMatches = student.school_year_semester.includes(selectedYear.value);
-      return yearMatches && semesterMatches;
-    }).map((item, index) => {
-      const isGenerated = id_Gen_Array.some((imageName) =>
-        imageName.includes(`${item.student_no}_f.png`)
-      );
+            const semesterMatches = student.school_year_semester.includes(selectedYear.value);
+            return yearMatches && semesterMatches;
+            }).map((item, index) => {
+            const isGenerated = id_Gen_Array.some((imageName) =>
+                imageName.includes(`${item.student_no}_f.png`)
+            );
 
-      return {
-        generate_id: item.id,
-        student_id: item.student_no,
-        last_name: item.last_name,
-        middle_name: item.middle_name,
-        first_name: item.first_name,
-        course: item.course,
-        status: isGenerated ? true : false,
-      };
-    });
-  } else {
-    return [];
-  }
-});
+            return {
+                generate_id: item.id,
+                student_id: item.student_no,
+                last_name: item.last_name,
+                middle_name: item.middle_name,
+                first_name: item.first_name,
+                course: item.course,
+                status: isGenerated ? true : false,
+            };
+            });
+        } else {
+            return [];
+        }
+        });
 
         watch(users, async (newUsers) => {
 
@@ -405,10 +406,10 @@ const filteredStudents = computed(() => {
                             //     <button type="button" class="btn btn-primary pop" data-id="${row.student_id}">
                             //     View
                             // </button>
+                            // <button type="button" class="btn btn-primary view" data-bs-toggle="modal"
+                            // data-bs-target="#viewModal"
+                            // data-bs-whatever="@getbootstrap" data-id="${row.generate_id}">debug</button>
                                 return `
-                            <button type="button" class="btn btn-primary view" data-bs-toggle="modal"
-                            data-bs-target="#viewModal"
-                            data-bs-whatever="@getbootstrap" data-id="${row.generate_id}">debug</button>
 
                             <button type="button" class="btn btn-primary pop" data-id="${row.student_id}">
                                 View
@@ -479,7 +480,12 @@ const filteredStudents = computed(() => {
                                         }
                                     }
 
-                                    console.log(selectedCheckboxes);
+                                    // console.log('selectedCheckBocs')
+                                    // console.log(users.value.data)
+                                    // console.log(selectedCheckboxes);
+                                    mappedUsers
+                                    selectedCheckboxes.student_cred =mappedUsers.value
+                                    console.log(selectedCheckboxes)
                                 }
                             );
                         });
@@ -517,7 +523,6 @@ const filteredStudents = computed(() => {
                 $("#myTable").on("click", ".preview", async function () {
                     const rowIndex = table.row($(this).closest("tr")).index();
                     const rowData = table.row(rowIndex).data();
-                    console.log(rowData);
                     data_id.value = this.getAttribute("data-id");
                     // pass the id of row click
                     // openModalView(data_id);
@@ -809,6 +814,12 @@ const filteredStudents = computed(() => {
             // }
         });
 
+        // map to aaray of users
+        const mappedUsers = computed(() => {
+             // Use the filter method to get the user objects based on the selected IDs
+            return users.value.data.filter(user => selectedCheckboxes.pids.includes(user.id));
+        })
+
         // Watch for changes in selectedYear to update filteredStudents
         watch(selectedYear, () => {
         if (isDataTableInitialized.value) {
@@ -842,6 +853,7 @@ const filteredStudents = computed(() => {
                     params: {
                         id: selectedCheckboxes.pids.length,
                         st_id: selectedCheckboxes.student_data,
+                        st_cred: selectedCheckboxes.student_cred,
                     },
                 })
                 .then((res) => {

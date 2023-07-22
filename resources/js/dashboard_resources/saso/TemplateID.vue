@@ -246,32 +246,32 @@
                             ref="draggableCanvases"
                         ></canvas>
                     </div> -->
-                    <div class="col-md-6" style="height: 380px; overflow: hidden; padding: 1rem;">
+                    <div class="col-md-6" style="height: 332px; padding: 1rem; width: 42.7%;">
                         <canvas
                             class=""
                             ref="canvasRef"
                             :width="canvasWidth"
                             :height="canvasHeight"
                         ></canvas>
-                        <div v-if="isLoading" class="canvas-con">
+                        <!-- <div v-if="isLoading" class="canvas-con">
                             <div class="loading-message">
                                 <h3 class="text-secondary"><b>Front Template.</b></h3>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     
-                    <div class="col-md-6" style="height: 380px; overflow: hidden; padding: 1rem;">
+                    <div class="col-md-6" style="height: 332px; padding: 1rem; width: 42.7%;">
                         <canvas
                             class=""
                             ref="canvasBackRef"
                             :width="canvasWidth"
                             :height="canvasHeight"
                         ></canvas>
-                        <div v-if="isLoading" class="canvas-con">
+                        <!-- <div v-if="isLoading" class="canvas-con">
                             <div class="loading-message">
                                 <h3 class="text-secondary"><b>Back Template.</b></h3>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -358,7 +358,10 @@ export default defineComponent({
   },
     setup() {
         
-        
+        const zoomStep = 0.01; // Adjust this value to control zoom speed
+        const minZoom = 0.9; // Minimum zoom level
+        const maxZoom = 2.0; // Maximum zoom level
+        let zoomLevel = 1.0; // Initial zoom level
         // const tmpID = ref("/id_template/collegef.png");
         // storage for templates
         const imageTemplates = ref([]);
@@ -559,9 +562,26 @@ export default defineComponent({
             }
         };
 
+        const handleZoom = (event) => {
+            event.preventDefault();
+            const delta = Math.sign(event.deltaY);
+
+            // Calculate the new zoom level with adjusted zoomStep
+            const newZoomLevel = Math.min(Math.max(zoomLevel + delta * zoomStep, minZoom), maxZoom);
+
+            if (newZoomLevel !== zoomLevel) {
+                zoomLevel = newZoomLevel;
+                redrawCanvas();
+            }else{
+                zoomLevel = 1.0
+                redrawCanvas();
+            }
+        };
+
         const redrawCanvas = () => {
             const canvas = canvasRef.value;
             const canvasBack = canvasBackRef.value;
+
             try {
                 if (canvas && canvasBack) {
                 const context = canvas.getContext("2d");
@@ -569,14 +589,14 @@ export default defineComponent({
 
                 // we devided by 2 to make it smaller
                 const canvasWidth = canvas.width / 2;
-                const canvasHeight = canvas.height / 2;
+                let canvasHeight = canvas.height / 2;
                 // front
                 const offscreenCanvas = document.createElement("canvas");
                 const offscreenContext = offscreenCanvas.getContext("2d");
 
                 // back
                 const offscreenCanvasBack = document.createElement("canvas");
-                const offscreenContextBack = offscreenCanvas.getContext("2d");
+                const offscreenContextBack = offscreenCanvasBack.getContext("2d");
 
                 // Set offscreen canvas size
                 offscreenCanvas.width = canvasWidth;
@@ -606,19 +626,27 @@ export default defineComponent({
                     let offsetX = 0,
                         offsetY = 0;
 
-                    if (templateAspectRatio > canvasAspectRatio) {
-                        console.log('greater than on canvas')
-                        // Template image is wider than the canvas
-                        drawWidth = canvasWidth;
-                        drawHeight = drawWidth / templateAspectRatio;
-                        offsetY = (canvasHeight - drawHeight) / 2;
+                    console.log(templateAspectRatio, canvasAspectRatio)
+                    if (templateAspectRatio != canvasAspectRatio) {
+                        console.log('Portrait mode');
+                        // Template image is taller than the canvas (portrait mode)
+                        drawHeight = canvasHeight;
+                        drawWidth = drawHeight * templateAspectRatio;
+                        offsetX = (canvasWidth - drawWidth) / 2;
+                        // Calculate the zoom level to make the template fit in the canvas width
+                        // zoomLevel = canvasWidth / drawWidth;
+
+                        // console.log(zoomLevel)
                     } else {
-                        // console.log('not greater than on canvas')
+                        console.log('Landscape mode');
                         // Template image is taller than the canvas
                         drawHeight = canvasHeight;
                         drawWidth = drawHeight * templateAspectRatio;
                         offsetX = (canvasWidth - drawWidth) / 2;
                     }
+
+                    // Apply the zoom level to the back offscreen canvas
+                    // offscreenContext.scale(zoomLevel, zoomLevel);
 
                     // Draw the template image on the offscreen canvas
                     offscreenContext.drawImage(
@@ -643,6 +671,7 @@ export default defineComponent({
 
                         // Add event listener for mouse click on the front canvas
                         canvas.addEventListener("click", handleMouseClick);
+                        // canvas.addEventListener("click", handleZoom);
                         // Draw the text elements
                         if (textContents.value) {
                             // console.log(selectedFontSize.value)
@@ -653,7 +682,7 @@ export default defineComponent({
                                     // get the selected text
                                     selectedContent.value = textContent.content
                                     offscreenContext.fillStyle = "green"; // Apply selection style for the selected text content (green)
-                                    offscreenContext.font = `${textContent.fontSize+1}px ${textContent.fontFamily}`;
+                                    offscreenContext.font = `${textContent.fontSize+0.5}px ${textContent.fontFamily}`;
                                             // Shadow properties
                                             offscreenContext.shadowColor = "grey";
                                             offscreenContext.shadowOffsetX = 1;
@@ -672,10 +701,14 @@ export default defineComponent({
                         }
 
                          
-
+                        
                         // Copy the offscreen canvas to the visible canvas
                         context.clearRect(0, 0, canvasWidth, canvasHeight);
+                        // Set the scaling for the front context based on the zoomLevel
+                        // context.scale(zoomLevel, zoomLevel);
                         context.drawImage(offscreenCanvas, 0, 0);
+                         // Reset the scaling back to 1.0 for future redraws (front)
+                        // context.scale(1.0, 1.0);
 
                         backTemplateImage.src = collegeb.value
                         backTemplateImage.onload = () => {
@@ -685,7 +718,7 @@ export default defineComponent({
                             let backDrawWidth, backDrawHeight;
                             let backOffsetX = 0, backOffsetY = 0;
 
-                            if (backTemplateAspectRatio > canvasAspectRatio) {
+                            if (backTemplateAspectRatio != canvasAspectRatio) {
                                 // Back template image is wider than the canvas
                                 backDrawWidth = canvasWidth;
                                 backDrawHeight = backDrawWidth / backTemplateAspectRatio;
@@ -720,7 +753,7 @@ export default defineComponent({
                                 );
                                 // Add event listener for mouse click on the back canvas
                                 canvasBack.addEventListener("click", handleMouseClick);
-
+                                canvasBack.addEventListener("wheel", handleZoom);
                                 // Draw the text elements
                                 if (textContentsBack.value) {
                                     textContentsBack.value.forEach((textContent, index) => {
@@ -730,7 +763,7 @@ export default defineComponent({
                                             //get the selected text
                                             selectedContent.value = textContent.content
                                             offscreenContextBack.fillStyle = "green"; // Apply selection style for the selected text content (green)
-                                            offscreenContextBack.font = `${textContent.fontSize+1}px ${textContent.fontFamily}`;
+                                            offscreenContextBack.font = `${textContent.fontSize+0.5}px ${textContent.fontFamily}`;
                                             // Shadow properties
                                             offscreenContextBack.shadowColor = "grey";
                                             offscreenContextBack.shadowOffsetX = 1;
@@ -751,7 +784,11 @@ export default defineComponent({
 
                                 
                                 contextBack.clearRect(0, 0, canvasWidth, canvasHeight);
-                                contextBack.drawImage(offscreenCanvas, 0, 0);
+                                 // Set the scaling for the back context based on the zoomLevel
+                                // contextBack.scale(zoomLevel, zoomLevel);
+                                contextBack.drawImage(offscreenCanvasBack, 0, 0);
+                                // Reset the scaling back to 1.0 for future redraws (back)
+                                // contextBack.scale(1.0, 1.0);
                             }
                             
                         
@@ -786,7 +823,7 @@ export default defineComponent({
             positions.signature = {
                 x: signatureX.value,
                 y: signatureY.value,
-                with: signatureWidth.value,
+                width: signatureWidth.value,
                 height: signatureHeight.value,
             }
 
@@ -908,7 +945,7 @@ export default defineComponent({
             const offsetXBack = event.clientX - rectBack.left;
             const offsetYBack = event.clientY - rectBack.top;
 
-            // Check if the mouse is within the profile image
+            // Check if the mouse is within the signature image
             if (
                 offsetXBack >= signatureX.value &&
                 offsetXBack <= signatureX.value + signatureWidth.value &&
@@ -1263,6 +1300,8 @@ export default defineComponent({
                 signatureX.value = templateCoordinates.value[0]?.signature_x || (240+64.02)
                 signatureY.value = templateCoordinates.value[0]?.signature_y-10 || 75
 
+                signatureWidth.value = templateCoordinates.value[0]?.signature_w || 300 / 2
+                signatureHeight.value = templateCoordinates.value[0]?.signature_h || 150
                 console.log(templateCoordinates.value);
                 // console.log(templateCoordinates.value);
             } catch (error) {
@@ -1310,6 +1349,7 @@ export default defineComponent({
 
         return {
             handleExportButtonClick,
+            handleZoom,
             // saveCanvasAsImage,
             canvasRef,
             canvasBackRef,

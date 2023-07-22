@@ -43,6 +43,8 @@ return new class extends Migration
             $table->integer('textContents_4_y');//middle name
             $table->string('textContents_4_fs');//stundent no
             $table->string('textContents_4_ff');//stundent no
+            $table->integer('signature_w');
+            $table->integer('signature_h');
             $table->integer('signature_x');
             $table->integer('signature_y');
             $table->integer('textContentsBack_0_x');//contact person

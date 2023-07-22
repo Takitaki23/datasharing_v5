@@ -28,6 +28,11 @@ resolve: {
         vue: 'vue/dist/vue.esm-bundler.js',
     },
 },
+esbuild: {
+    // This will exclude jQuery from the bundle
+    // as it will be loaded from the CDN
+    external: ['jquery'],
+  },
     // ],
     // resolve: {
     //     alias: {

@@ -72,6 +72,8 @@ class TemplateController extends Controller
 
             // back coordinates
             // signature
+            $alreadySaveT->signature_w = $request->signature['width'];
+            $alreadySaveT->signature_h = $request->signature['height'];
             $alreadySaveT->signature_x = $request->signature['x'];
             $alreadySaveT->signature_y = $request->signature['y'];
             // contents contact person
@@ -146,6 +148,8 @@ class TemplateController extends Controller
 
             // back coordinates
             // signature
+            $template->signature_w = $request->signature['width'];
+            $template->signature_h = $request->signature['height'];
             $template->signature_x = $request->signature['x'];
             $template->signature_y = $request->signature['y'];
             // contents contact person
