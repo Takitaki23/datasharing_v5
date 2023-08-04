@@ -9,7 +9,21 @@
                 </ol>
               </nav>
         </div>
-        <div class="row justify-content-center table-main"  style="width: 90%; margin-left:15%;">
+
+        <!-- Sorting -->
+        <div class="row table-main"  style="width: 90%; margin-left:15%;">
+          <!-- <div class="input-group mb-3 col-sm-4" style="width: 30%;">
+                            <label class="input-group-text"><b>Semester</b></label>
+                            <select class="form-select">
+                                <option selected class="text-secondary"><b>Choose a semester...</b></option>
+                                <option class="text-secondary">
+                                  2022-2023 / 1st Semester
+                                </option>
+                                <option class="text-secondary">
+                                  2023-2024 / 1st Semester
+                                </option>
+                            </select>
+            </div> -->
             <div class="col-md-12">
             <div class="table-responsive" style="max-height: 500px;">
                     <table class="table table-hover table-sm" id="myTable">
@@ -39,6 +53,10 @@
     </div>
     <!-- view modal -->
     <viewModal v-show="modalVisible" @close="closeModalView" />
+    <addModal v-show="addModalVisible" @close="closeModalEdit" />
+    <updateModal v-show="updateModalVisible" @close="closeModalUpdate" />
+    <previewModal v-show="previewModalVisible" @close="closeModalPreview" />
+
 </template>
 
 <script>
@@ -68,14 +86,23 @@
 
     // import modal
 import viewModal from "./ViewStudentsInformation.vue";
+import addModal from "./AddPayment.vue";
+import updateModal from "./UpdatePayment.vue"
+import previewModal from "./PreviewAssesment.vue"
     export default {
       components: {
         viewModal,
+        addModal,
+        updateModal,
+        previewModal
       
     },
         setup(){
             const users = ref([])
             const modalVisible = ref(false);
+            const addModalVisible = ref(false);
+            const updateModalVisible = ref(false);
+            const previewModalVisible = ref(false);
 
             // view modal function
         const openModalView = async (rowId) => {
@@ -88,6 +115,41 @@ import viewModal from "./ViewStudentsInformation.vue";
             // hide modal
             modalVisible.value = false;
         };
+
+           // view modal add function
+           const openModalAdd = async (rowId) => {
+            // show modal
+            console.log(rowId);
+            addModalVisible.value = true;
+        };
+        // close modal add
+        const closeModalAdd = async () => {
+            // hide modal
+            addModalVisible.value = false;
+        };
+        // view modal update function
+        const openModalUpdate = async (rowId) => {
+        // show modal
+        console.log(rowId);
+        updateModalVisible.value = true;
+        };
+        // close modal add
+        const closeModalUpdate = async () => {
+        // hide modal
+        closeModalPreview.value = false;
+        };
+          // view modal preview assesment function
+        const openModalPreview = async (rowId) => {
+        // show modal
+        console.log(rowId);
+        previewModalVisible.value = true;
+        };
+        // close modal add
+        const closeModalPreview = async () => {
+        // hide modal
+        closeModalPreview.value = false;
+        };
+
             const fetchUsers = async () => {
                 // hardcoded user data for testing
                 const initialUsers = [
@@ -165,6 +227,18 @@ import viewModal from "./ViewStudentsInformation.vue";
                             <button type="button" class="btn btn-primary view" data-bs-toggle="modal"
                             data-bs-target="#viewModal"
                             data-bs-whatever="@getbootstrap">View</button>
+
+                            <button type="button" class="btn btn-success add" data-bs-toggle="modal"
+                            data-bs-target="#addModal"
+                            data-bs-whatever="@getbootstrap">Add</button>
+
+                            <button type="button" class="btn btn-warning update" data-bs-toggle="modal"
+                            data-bs-target="#updateModal"
+                            data-bs-whatever="@getbootstrap">Update</button>
+
+                            <button type="button" class="btn btn-secondary preview" data-bs-toggle="modal"
+                            data-bs-target="#previewModal"
+                            data-bs-whatever="@getbootstrap">Preview</button>
  
                             `;
                         },
@@ -180,12 +254,39 @@ import viewModal from "./ViewStudentsInformation.vue";
                 // pass the id of row click
                 openModalView(rowData.id);
             });
+            $("#myTable").on("click", ".add", function () {
+                const rowIndex = table.row($(this).closest("tr")).index();
+                const rowData = table.row(rowIndex).data();
+                // pass the id of row click
+                openModalAdd(rowData.id);
+            });
+            $("#myTable").on("click", ".update", function () {
+                const rowIndex = table.row($(this).closest("tr")).index();
+                const rowData = table.row(rowIndex).data();
+                // pass the id of row click
+                openModalUpdate(rowData.id);
+            });
+            $("#myTable").on("click", ".preview", function () {
+                const rowIndex = table.row($(this).closest("tr")).index();
+                const rowData = table.row(rowIndex).data();
+                // pass the id of row click
+                openModalPreview(rowData.id);
+            });
             });
             return{
                 users,
                 modalVisible,
                 closeModalView,
                 openModalView,
+                openModalAdd,
+                addModalVisible,
+                closeModalAdd,
+                openModalUpdate,
+                updateModalVisible,
+                closeModalUpdate,
+                openModalPreview,
+                previewModalVisible,
+                closeModalPreview,
             }
         }
     }

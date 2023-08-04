@@ -19,7 +19,7 @@
                       <th>Last Name</th>
                       <th>Middle Name</th>
                       <th>First Name</th>
-                      <th>Section</th>
+                      <th>Course</th>
                       <th>Action</th>
                       </tr>
                   </thead>

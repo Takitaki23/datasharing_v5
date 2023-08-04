@@ -14,9 +14,12 @@
             <span>View Records</span>
           </a>
         </li><!-- End View Records Nav -->
-
-     
-        
+        <li class="nav-item">
+          <a class="nav-link" href="#" @click.prevent="toggleReport">
+            <i class="fas fa-users"></i>
+            <span>Reports</span>
+          </a>
+        </li><!-- End View Records Nav -->
       </ul>
     </aside>
     <!-- Cashier Dashboard Design -->
@@ -39,6 +42,9 @@ const DashboardMain = defineAsyncComponent(() =>
 );
 const Datatable = defineAsyncComponent(() =>
     import("../dashboard_resources/cashier/datatable.vue")
+);
+const Reports = defineAsyncComponent(() =>
+    import("../dashboard_resources/cashier/Reports.vue")
 );
 
 
@@ -69,6 +75,9 @@ export default {
         const goToDashboardMain = () => {
           currentComponent.value = "DashboardMain";
         };
+        const toggleReport = () => {
+          currentComponent.value = "Reports";
+        };
 
         
 
@@ -92,14 +101,14 @@ export default {
             toggleDatatable,
             redirectToOtherDashboard,
             goToDashboardMain, // expose the new method to the template
-
+            toggleReport
             
         };
     },
     components: {
       DashboardMain,
       Datatable,
-
+      Reports
       
     }
 };
