@@ -12,7 +12,7 @@
 
         <!-- Sorting -->
         <div class="row table-main"  style="width: 90%; margin-left:15%;">
-          <!-- <div class="input-group mb-3 col-sm-4" style="width: 30%;">
+          <div class="input-group mb-3 col-sm-4" style="width: 30%;">
                             <label class="input-group-text"><b>Semester</b></label>
                             <select class="form-select">
                                 <option selected class="text-secondary"><b>Choose a semester...</b></option>
@@ -23,7 +23,7 @@
                                   2023-2024 / 1st Semester
                                 </option>
                             </select>
-            </div> -->
+            </div>
             <div class="col-md-12">
             <div class="table-responsive" style="max-height: 500px;">
                     <table class="table table-hover table-sm" id="myTable">
