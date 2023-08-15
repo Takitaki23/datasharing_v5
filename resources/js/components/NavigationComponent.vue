@@ -16,11 +16,11 @@
             <i class="fas fa-user"></i> {{ state.credentials.name }}
           </button>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-            <li class="dropdown-item-icon">
-              <span class="icon"><i class="fas fa-gear"></i></span>
+            <!-- <li class="dropdown-item-icon"> -->
+              <!-- <span class="icon"><i class="fas fa-gear"></i></span> -->
                <!-- Change password option (insert here the actual router link)-->
-              <router-link class="dropdown-item" to="#">Change Password</router-link>
-            </li>
+              <!-- <router-link class="dropdown-item" to="#">Change Password</router-link> -->
+            <!-- </li> -->
               <!-- Logout option -->
             <li class="dropdown-item-icon">
               <span class="icon"><i class="fas fa-arrow-right"></i></span>

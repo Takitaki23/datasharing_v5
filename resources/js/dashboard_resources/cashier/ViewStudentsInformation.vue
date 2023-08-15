@@ -37,6 +37,9 @@
                 </div>
               </div>
               <hr>
+              <!-- If may nag bayad ng sobra na tuition sa dapat na bayaran ng student is mababawasan yung tuition sa next semi month lang and 
+                  hindi to mag papaid hanngat di namemeet yung tuition na dapat bayaran sa month na yon
+              -->
               <!-- View Semi Monthly Partition  -->
               <h5 class="fw-bold">View Semi Monthly Partition</h5>
               <table class="table table-striped mt-3">
@@ -65,7 +68,6 @@
                         </tr>
                       </tbody>
               </table>      
-                
                 <!-- View Payment Details -->
               <center class="mt-5"><h4 for="" class="fw-bold">Payment Details</h4></center>
                   <table class="table table-striped mt-3">

@@ -51,6 +51,11 @@
                   <button class="btn btn-primary">Add to list</button>
                 </div>
 
+                <!-- If select 7th semi monthly, the total payable fee must be divided into 7 and 
+                     if  select 8th semi monthly, the total payable fee must be divided into 8
+                    
+                    -->
+    
                 <!-- Partition Dropdown -->
                 <div class="col-md-3">
                   <label for="" class="fw-bold">Select Partition</label>
@@ -59,8 +64,8 @@
                       {{ selectedPartitionText }}
                     </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#" @click="selectPartition('7th month', '7th month')">7th month</a></li>
-                    <li><a class="dropdown-item" href="#" @click="selectPartition('8th month', '8th month')">8th month</a></li>
+                    <li><a class="dropdown-item" href="#" @click="selectPartition('7th monthly', '7th monthly')">7th semi monthly</a></li>
+                    <li><a class="dropdown-item" href="#" @click="selectPartition('8th monthly', '8th monthly')">8th semi monthly</a></li>
                   </ul>
                 </div>
               </div>
@@ -86,7 +91,6 @@
                   </td>
                 </tr>
 
-
                 <!-- Downpayment -->
                 <tr>
                   <td>Downpayment</td>
@@ -104,7 +108,6 @@
               </div>
            
             </div>
-
             <!--  Input for Downpayment -->
             <div class="row mt-5">
               <div class="col-md-3">

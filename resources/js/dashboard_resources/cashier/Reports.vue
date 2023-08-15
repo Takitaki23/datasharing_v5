@@ -15,6 +15,8 @@
         </div>
       </div>
       
+      <!-- You can see here the daily report transactions -->
+      
       <!-- Reports -->
       <div class="card mt-5">
         <div class="card-header">

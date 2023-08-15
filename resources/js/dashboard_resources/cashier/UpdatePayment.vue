@@ -60,6 +60,8 @@
                       <label for="" class="fw-bold mt-3">OR Number</label> <br>
                       <input type="text"  class="form-control mt-3">
                     </div>
+
+                    <!-- If lumampas yung binayad doon sa semi monthly is dapat mag adjust yung babayaran next semi month -->
                     <div>
                       <label for="" class="fw-bold mt-3">Amount</label> <br>
                       <input type="text"  class="form-control mt-3">

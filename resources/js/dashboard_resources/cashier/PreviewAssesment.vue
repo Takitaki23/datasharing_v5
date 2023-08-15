@@ -8,6 +8,7 @@
               <h5 class="modal-title" id="exampleModalLabel">Preview Assesment Information</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <!-- Dito magdidisplay yung mga ininput na mga babayaran galing sa add button (dynamic) --> 
             <div class="modal-body">
               <!-- Student Assesment -->
               <div class="card">

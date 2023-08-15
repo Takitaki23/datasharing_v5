@@ -400,28 +400,50 @@ export default {
                         // { data: "guardian_address" },
                         // { data: "guardian_contact" },
                         // Button for View
+                        // {
+                        //     data: null,
+                        //     render: (data, type, row) => {
+                        //     //     <button type="button" class="btn btn-primary pop" data-id="${row.student_id}">
+                        //     //     View
+                        //     // </button>
+                        //     // <button type="button" class="btn btn-primary view" data-bs-toggle="modal"
+                        //     // data-bs-target="#viewModal"
+                        //     // data-bs-whatever="@getbootstrap" data-id="${row.generate_id}">debug</button>
+                        //         return `
+
+                        //     <button type="button" class="btn btn-primary pop" data-id="${row.student_id}">
+                        //         View
+                        //     </button>
+                        //     <button type="button" class="btn btn-primary preview" data-id="${row.student_id}">
+                        //         ID
+                        //     </button>
+
+                        //     <button type="button" class="btn btn-success add" data-bs-toggle="modal"
+                        //     data-bs-target="#addModal"
+                        //     data-bs-whatever="@getbootstrap" data-id="${row.generate_id}">Upload </button>                 
+                        //     `;
+                        //     },
+                        //     orderable: false,
+                        //     searchable: false,
+                        // },
                         {
                             data: null,
                             render: (data, type, row) => {
-                            //     <button type="button" class="btn btn-primary pop" data-id="${row.student_id}">
-                            //     View
-                            // </button>
-                            // <button type="button" class="btn btn-primary view" data-bs-toggle="modal"
-                            // data-bs-target="#viewModal"
-                            // data-bs-whatever="@getbootstrap" data-id="${row.generate_id}">debug</button>
                                 return `
-
-                            <button type="button" class="btn btn-primary pop" data-id="${row.student_id}">
-                                View
-                            </button>
-                            <button type="button" class="btn btn-primary preview" data-id="${row.student_id}">
-                                ID
-                            </button>
-
-                            <button type="button" class="btn btn-success add" data-bs-toggle="modal"
-                            data-bs-target="#addModal"
-                            data-bs-whatever="@getbootstrap" data-id="${row.generate_id}">Upload </button>                 
-                            `;
+                                    <div style="display: flex; gap: .5rem">
+                                        <button type="button" class="btn btn-primary pop" data-id="${row.student_id}">
+                                            View
+                                        </button>
+                                        <button type="button" class="btn btn-warning preview" data-id="${row.student_id}">
+                                            ID
+                                        </button>
+                                        <button type="button" class="btn btn-success add" data-bs-toggle="modal"
+                                            data-bs-target="#addModal"
+                                            data-bs-whatever="@getbootstrap" data-id="${row.generate_id}">
+                                            Upload
+                                        </button>
+                                    </div>
+                                `;
                             },
                             orderable: false,
                             searchable: false,

@@ -1,4 +1,7 @@
 <template>
+    <!-- This form must be in differenct page, dahil mangagagaling sa gradebook acc yung mga magsasagot na student,
+       so dito madadirect yung mga student na magsasagot ng exit interview
+    -->
   <div class="form-container">
     <!-- Form -->
     <form class="form">
@@ -149,6 +152,7 @@
                             <br>
                             <label for="col-form-label" class="fw-bold">Is your current position is: </label> <br>
                             <select id="birth_order" class="form-select mb-3" @change="toggleOtherInput">
+                                <option value="">Please select</option>
                                 <option value="">In your field of study</option>
                                 <option value="">In a related field</option>
                                 <option value="">Not related</option>
@@ -222,6 +226,7 @@
             <div class="col">
               <label for="col-form-label" class="fw-bold">What are your plans for the immediate future?: </label>
               <select id="future_plan_select" class="form-select mb-3" @change="toggleFuturePlan">
+                               <option value="">Please select</option>
                                 <option value="">Continue education</option>
                                 <option value="">Work</option>
                                 <option value="">Start a Family</option>
@@ -235,6 +240,7 @@
             <div class="col">
               <label for="col-form-label" class="fw-bold">How you rate the usefulness of your educational preparation at EPCST for your career plans?: </label>
               <select id="birth_order" class="form-select mb-3" @change="toggleOtherInput">
+                                <option value="">Please select</option>
                                 <option value="">Not helpful</option>
                                 <option value="">Somewhat helpful</option>
                                 <option value="">Helpful</option>
@@ -246,6 +252,7 @@
             <div class="col">
               <label for="col-form-label" class="fw-bold">Which aspects of your EPCST education were the most important and most helpful in preparing for your career plans?: </label>
               <select id="birth_order" class="form-select mb-3" @change="toggleOtherInput">
+                                <option value="">Please select</option>
                                 <option value="">Curriculum</option>
                                 <option value="">Career Planning Department</option>
                                 <option value="">Training / Seminar</option>

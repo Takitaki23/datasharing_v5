@@ -39,6 +39,9 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('guidance1234'),
             'role' => 'guidance'
         ]);
+
+        // The cashier account must be 2 account 
+
            // Cashier Account
         User::factory()->create([
             'name' => 'cashier',
@@ -46,6 +49,11 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('cashier1234'),
             'role' => 'cashier'
         ]);
+
+        // Add another 1 account for cashier 
+
+
+    
 
         // error_log($data);
         // User::factory()->create();

@@ -1,4 +1,23 @@
 <template>
+
+    <!-- Revision
+        
+        1. Nagcocompress yung image once na mag magcapture, dapat is kung ano yung size ng lalagyan ng image sa template (yung box na naka png)
+            is ganon na den size ng sa cropping, possible na iyun yung nakaka affect sa pag cocompress ng face
+
+        2. Check all the resizing, di pa nag reresize lahat ng font 
+
+        3. need pa irefresh buong page kapag nag capture ng image, hindi agad nag didisplay yung bagong capture sa id 
+
+        4. need paltan yung pag reresize ng image dahil nag didistort kapag nireresize, the recommendation is yung kagaya na parang sa cropping or automatic na 
+           na reresize yung image base sa template.   
+
+        5. dapat nauupdate padin yung position ng info sa template kahit na save template na ito. 
+            e.g nag change template at in-save ito kahit hindi pa tama ang pagkakalagay ng position, dapat is puwedeng ayusin ang pagkakalagay ng mga ito sa template. 
+            Kapag naayos na ang pwesto ng mga impormasyon sa nasabing template, dapat ay agad na ma-update ang kanilang bagong pwesto.
+        
+
+    -->
     <div class="main-container" style="height: 650px; overflow: scroll;">
         <div class="dashboard_header" style="   margin: auto; margin-left: 4rem;">
             <h1 class="fw-bold">Template ID</h1>

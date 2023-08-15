@@ -1,4 +1,8 @@
 <template>
+
+  <!-- This form must be in differenct page, dahil mangagagaling sa gradebook acc yung mga mag sasagot na student
+       so dito madadirect yung mga student na magsasagot ng personal sheet
+  -->
   <div class="form-container">
     <!-- Form -->
     <form class="form" @submit.prevent="submitForm">
@@ -91,6 +95,7 @@
                 <br>
                 <label for="col-form-label" class="fw-bold">Birth Order Among Siblings: </label>
                 <select id="birth_order" class="form-select mb-3" @change="toggleBirthOrderInput">
+                  <option value="">Please select</option>
                   <option value="">First</option>
                   <option value="">Second</option>
                   <option value="">Third</option>
@@ -139,6 +144,7 @@
                             <br>
                             <label for="col-form-label" class="fw-bold">Blood Type: </label>
                               <select id="blood_type" class="form-select">
+                                <option value="">Please select</option>
                                 <option value="">O+</option>
                                 <option value="">O-</option>
                                 <option value="">A+</option>
@@ -209,6 +215,7 @@
         <div class="form-group">
           <label class="form-label" for="address">Parent's Marital Status:</label>
           <select id="" class="form-select">
+                                <option value="">Please select</option>
                                 <option value="">Married in Church</option>
                                 <option value="">Civil Married</option>
                                 <option value="">Legally Seperated</option>
@@ -281,6 +288,7 @@
                             <br>
                             <label for="col-form-label" class="fw-bold">Highest Educational Attainment: </label>
                             <select id="father_highest_attainment_select" class="form-select mb-3" @change="toggleFatherAttainment">
+                                <option value="">Please select</option>
                                 <option value="">Elementary Graduate</option>
                                 <option value="">Highschool Graduate</option>
                                 <option value="">Elementary Undergraduate</option>
@@ -360,6 +368,7 @@
                             <br>
                             <label for="col-form-label" class="fw-bold">Highest Educational Attainment: </label>
                             <select id="mother_highest_attainment_select" class="form-select mb-3" @change="toggleMotherAttainment">
+                                <option value="">Please select</option>
                                 <option value="">Elementary Graduate</option>
                                 <option value="">Highschool Graduate</option>
                                 <option value="">Elementary Undergraduate</option>
@@ -546,6 +555,7 @@
                               <br>
                               <label for="col-form-label" class="fw-bold">Why did you choose to enroll in EPCST?</label>
                               <select id="why_epcst_select" class="form-select mb-3" @change="toggleEpcstInput">
+                                <option value="">Please select</option>
                                 <option value="quality_education">Quality Education</option>
                                 <option value="good_facilities">Good Facilities</option>
                                 <option value="recommendation">Recommended by friends, relatives, etc</option>
@@ -562,6 +572,7 @@
                                     <div class="mb-3">
                                         <label for="col-form-label" class="fw-bold">What other school do you consider?: </label>
                                         <select id="why_school_consider_select" class="form-select mb-3"  @change="toggleSchoolConsider">
+                                          <option value="">Please select</option>
                                           <option value="">BPSU</option>
                                           <option value="">APCAS</option>
                                           <option value="">HEROES</option>
